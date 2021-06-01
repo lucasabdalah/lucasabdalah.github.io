@@ -9,7 +9,7 @@
 locale                   : "en-US"
 title                    : "Lucas Abdalah"
 title_separator          : "-"
-name                     : &name "Your Name"
+name                     : &name "Lucas Abdalah"
 description              : &description "personal description"
 url                      : https://lucasabdalah.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -82,13 +82,13 @@ analytics:
 author:
   name             : "Lucas Abdalah"
   avatar           : "profile.png"
-  bio              : "My biography here"
+  bio              : "BSc - Universidade Federal do Ceará"
   location         : "Fortaleza-CE"
   employer         :
   pubmed           : # "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?user=THc679oAAAAJ&hl=en"
-  email            :
-  researchgate     :  "https://www.researchgate.net/profile/Lucas-Abdalah"
+  email            : "lucas.abdalah@gtel.ufc.br"
+  researchgate     : "https://www.researchgate.net/profile/Lucas-Abdalah"
   uri              :
   bitbucket        :
   codepen          :
