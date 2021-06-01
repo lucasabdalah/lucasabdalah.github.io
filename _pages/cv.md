@@ -9,18 +9,21 @@ redirect_from:
 
 {% include base_path %}
 
+---
 Education
 ======
-* B.S. in GitHub, GitHub University, 2012
-* M.S. in Jekyll, GitHub University, 2014
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
+* B.S. in Telecommunications Engineering , [Universidade Federal do Ceará](https://telecom.ufc.br/en/), (2016 - Present)
+* Exchange Program in Eletronics Engineering (4th year), [Université Côte d'Azur](https://polytech.univ-cotedazur.fr/formations/formations-ingenieurs/ingenieur-electronique), Sophia-Antipolis, France (2019 - 2020)
+<!-- * Ph.D in Version Control Theory, GitHub University, 2018 (expected) -->
 
 Work experience
 ======
-* Summer 2015: Research Assistant
+* March 2020 - September 2020: Research Assistant
   * Github University
   * Duties included: Tagging issues
   * Supervisor: Professor Git
+
+ at I3S Laboratory and student at Université de Nice Sophia-Antipolis (Université Côte d’Azur)
 
 * Fall 2015: Research Assistant
   * Github University
