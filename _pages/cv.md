@@ -10,16 +10,17 @@ redirect_from:
 {% include base_path %}
 
 ---
+
 Education
 ======
-* B.S. in Telecommunications Engineering , [Universidade Federal do Ceará](https://telecom.ufc.br/en/), (2016 - Present)
+* B.S. in Telecommunications Engineering , [Universidade Federal do Ceará](https://telecom.ufc.br/en/), Fortaleza-CE, Brazil (2016 - Present)
 * Exchange Program in Eletronics Engineering (4th year), [Université Côte d'Azur](https://polytech.univ-cotedazur.fr/formations/formations-ingenieurs/ingenieur-electronique), Sophia-Antipolis, France (2019 - 2020)
 <!-- * Ph.D in Version Control Theory, GitHub University, 2018 (expected) -->
 
 Work experience
 ======
 * March 2020 - September 2020: Research Assistant
-  * Github University
+  * I3S Laboratory (CNRS), Université Côte d'Azur
   * Duties included: Tagging issues
   * Supervisor: Professor Git
 
