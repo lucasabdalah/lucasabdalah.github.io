@@ -14,50 +14,70 @@ redirect_from:
 Education
 ======
 * B.S. in Telecommunications Engineering , [Universidade Federal do Ceará](https://telecom.ufc.br/en/), Fortaleza-CE, Brazil (2016 - Present)
-* Exchange Program in Eletronics Engineering (4th year), [Université Côte d'Azur](https://polytech.univ-cotedazur.fr/formations/formations-ingenieurs/ingenieur-electronique), Sophia-Antipolis, France (2019 - 2020)
+* Exchange Program in Eletronics Engineering Master (1st year), [Université Côte d'Azur](https://polytech.univ-cotedazur.fr/formations/formations-ingenieurs/ingenieur-electronique), Sophia-Antipolis, France (2019 - 2020)
 <!-- * Ph.D in Version Control Theory, GitHub University, 2018 (expected) -->
 
 Work experience
 ======
-* March 2020 - September 2020: Research Assistant
-  * I3S Laboratory (CNRS), Université Côte d'Azur
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+* Research Assistant (December 2020 - July 2021)
+  * GTEL Laboratory at Universidade Federal do Ceará
+  * Duties included: Matrix analysis problems connected to block term decompostion (BTD), and analyze atrial fibrillation ECGs outcomes using matrix-based and tensor models as BTD to assess its complexity.
+  * Supervisor: Walter Freitas Jr.
 
- at I3S Laboratory and student at Université de Nice Sophia-Antipolis (Université Côte d’Azur)
+* Research Assistant (March 2020 - September 2020)
+  * I3S Laboratory, CNRS, at Université Côte d'Azur
+  * Duties included: Analyze atrial fibrillation ECGs outcomes using tensor models as BTD to assess its complexity.
+  * Supervisor: Vicente Zarzoso
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+* Research Assistant (August 2018 - July 2019)
+  * GTEL Laboratory at Universidade Federal do Ceará
+  * Duties included: Introductory analysis of matrix and tensor decompositions, as canonical polyadic decomposition (CPD), applied to signal processing.
+  * Supervisor: Walter Freitas Jr.
   
 Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
+* Matlab/Octave
+* Python
+  * Numpy
+  * Seaborn
+  * Pandas
+* LaTex
+* Git/Github
+* Spreadsheets (Excel)
+* Windows
+* Ubuntu/Linux
+
+Languages
+======
+* Portuguese: Mother Language
+* French: B2 / Upper-Intermediate (462/699 TCF 2019)
+* English: Independent/Upper-Intermediate (940/990 TOEIC 2020)
+
+Soft Skills
+======
+* Teamwork
+* Problem-Solving, Autonomy and Creativity
+* Interest for Technologies
+* Communication
 
 Publications
 ======
-  <ul>{% for post in site.publications %}
+  <!-- <ul>{% for post in site.publications %}
     {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+  {% endfor %}</ul> -->
   
 Talks
 ======
-  <ul>{% for post in site.talks %}
+  <!-- <ul>{% for post in site.talks %}
     {% include archive-single-talk-cv.html %}
-  {% endfor %}</ul>
+  {% endfor %}</ul> -->
   
 Teaching
 ======
-  <ul>{% for post in site.teaching %}
+  <!-- <ul>{% for post in site.teaching %}
     {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+  {% endfor %}</ul> -->
   
 Service and leadership
 ======
-* Currently signed in to 43 different slack teams
+<!-- * Currently signed in to 43 different slack teams -->
