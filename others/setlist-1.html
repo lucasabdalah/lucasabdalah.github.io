@@ -5,7 +5,8 @@
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 80%;
+  outline: auto;
 }
 
 td, th {
@@ -14,156 +15,152 @@ td, th {
   padding: 8px;
 }
 
-tr:nth-child(even) {
-  background-color: #f1b2b2;
+tr:nth-child(odd) {
+  background-color: lightgray;
+}
+tr:first-child {
+  background-color: gray;
 }
 </style>
+<script>
+  function includeHTML() {
+    var z, i, elmnt, file, xhttp;
+    /* Loop through a collection of all HTML elements: */
+    z = document.getElementsByTagName("*");
+    for (i = 0; i < z.length; i++) {
+      elmnt = z[i];
+      /*search for elements with a certain atrribute:*/
+      file = elmnt.getAttribute("w3-include-html");
+      if (file) {
+        /* Make an HTTP request using the attribute value as the file name: */
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4) {
+            if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+            if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+            /* Remove the attribute, and call this function once more: */
+            elmnt.removeAttribute("w3-include-html");
+            includeHTML();
+          }
+        }
+        xhttp.open("GET", file, true);
+        xhttp.send();
+        /* Exit the function: */
+        return;
+      }
+    }
+  }
+</script>
+<!-- Script para inserir butao de auto scroll -->
+<!-- https://stackoverflow.com/questions/13831601/disabling-and-enabling-a-html-input-button -->
 </head>
 <body>
 
-<h2>Que Banda É Essa? - Aniversario da Clara Machado (11/12/2021) </h2>
+<h1>Que Banda É Essa? - Abdalah Vocal </h1>
 
-<h3>Ato (Animadão)</h3>
+<div id="toc">
+<h1> Lista de Músicas </h1>
+  <h2>Parte 1</h2>
+    <table>
+      <tr>
+        <th>Musica</th>
+        <th>Artista</th>
+        <th>Tom</th>
+        <th>Link</th>
+      </tr>
+      <tr>
+        <td><a href="#esperancas-perdidas">Esperanças Perdidas</a></td>
+        <td>Os Originais do Samba</td>
+        <th>Dm</th>
+        <th><a href="https://www.cifraclub.com.br/os-originais-do-samba/esperancas-perdidas/#tabs=false&instrument=cavaco">Cifra Club</a></th>
+      </tr>
+      <tr>
+        <td><a href="#trem-das-onze">Trem das Onze</a></td>
+        <th>Adoniran Barbosa</th>
+        <th>Dm</th>
+        <th><a href="https://www.cifraclub.com.br/adoniran-barbosa/trem-das-onze/#tabs=false&instrument=cavaco">Cifra Club</a></th>
+      </tr>
+      <tr>
+        <td><a href="#verdade">Verdade</a></td>
+        <th>Zeca Pagodinho</th>
+        <th>F</th>
+        <th><a href="https://www.cifraclub.com.br/zeca-pagodinho/verdade/#tabs=false&instrument=cavaco">Cifra Club</a></th>
+      </tr>
+      <tr>
+        <td><a href="#pra-batucar">Pra Batucar</a></td>
+        <th>Moacyr Luz</th>
+        <th>Dm</th>
+        <th><a href="https://www.cifraclub.com.br/moacyr-luz/pra-batucar/#tabs=false&instrument=cavaco">Cifra Club</a></th>
+      </tr>
+      <tr>
+        <td><a href="#vai-vadiar">Vai Vadiar</a></td>
+        <th>Zeca Pagodinho</th>
+        <th>Dm</th>
+        <th><a href="https://www.cifraclub.com.br/zeca-pagodinho/vai-vadiar/#tabs=false&instrument=cavaco">Cifra Club</a></th>
+      </tr>
+      <tr>
+        <td><a href="#falador-passa-mal">Falador Passa Mal</a></td>
+        <th>Os Originais do Samba</th>
+        <th>Dm</th>
+        <th><a href="https://www.cifraclub.com.br/os-originais-do-samba/falador-passa-mal-rapaz/#tabs=false&instrument=cavaco">Cifra Club</a></th>
+      </tr>
 
-<table>
-  <tr>
-    <!-- Header -->
-    <th>Musica</th>
-    <th>Link</th>
-    <th>Tom</th>
-    <th>Artista</th>
-  </tr>
-  <!-- List -->
-  <tr>
-    <td>Vai la, vai la</td>
-    <td><a href="https://www.cifraclub.com.br/fundo-de-quintal/vai-la-vai-la/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td><strong>F</strong></td>
-    <td>Fundo de Quintal</td>
-  </tr>
-  <tr>
-    <td>Ta escrito</td>
-    <td><a href="https://www.cifraclub.com.br/revelacao/ta-escrito/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>F</td>
-    <td>Grupo Revelacao</td>
-  </tr>
-  <tr>
-    <td>Não deixe o samba morrer</td>
-    <td><a href="https://www.cifraclub.com.br/alcione/nao-deixe-samba-morrer/#instrument=cavaco&tabs=false">Cifra Club</a></td>
-    <td>Dm</td>
-    <td>Alcione</td>
-  </tr>
-  <tr>
-    <td>Esperanças Perdidas</td>
-    <td><a href="https://www.cifraclub.com.br/os-originais-do-samba/esperancas-perdidas/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>Dm</td>
-    <td>Os Originais do Samba</td>
-  </tr>
-  <tr>
-    <td>Trem das Onze</td>
-    <td><a href="https://www.cifraclub.com.br/adoniran-barbosa/trem-das-onze/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>Dm</td>
-    <td>Adoniran Barbosa</td>
-  </tr> 
-</table>
+    </table>
+<hr>
+  <h2>Parte 2</h2>
+    <table>
+      <tr>
+        <th>Musica</th>
+        <th>Artista</th>
+        <th>Tom</th>
+        <th>Link</th>
+      </tr>
+      <!-- <tr>
+        <td><a href="#"></a></td>
+        <th></th>
+        <th></th>
+        <th><a href="">Cifra Club</a></th>
+      </tr> -->
+      <tr>
+        <td><a href="#estrela-da-paz">Estrela da Paz</a></td>
+        <td>Arlindo Cruz/Soweto</td>
+        <td>F</td>
+        <td><a href="https://www.cifraclub.com.br/arlindo-cruz/estrela-da-paz/#tabs=false&instrument=cavaco">Cifra Club</a></td>
+      </tr>
+      <tr>
+        <td>Deixa Acontecer</td>
+        <td><a href="https://www.cifraclub.com.br/revelacao/deixa-acontecer/#tabs=false&instrument=cavaco">Cifra Club</a></td>
+        <td>Am</td>
+        <td>Grupo Revelacao</td>
+      </tr>
+      <tr>
+        <td>Deixa Acontecer</td>
+        <td><a href="https://www.cifraclub.com.br/revelacao/deixa-acontecer/#tabs=false&instrument=cavaco">Cifra Club</a></td>
+        <td>Am</td>
+        <td>Grupo Revelacao</td>
+      </tr>
+    </table>
+</div>
+<!-- Lista de Musica -->
+<hr>
+<div id="esperancas-perdidas" w3-include-html="https://lucasabdalah.github.io/others/abdalah-vocal/esperancas-perdidas.html"></div>
+<hr>
+<div id="trem-das-onze" w3-include-html="https://lucasabdalah.github.io/others/abdalah-vocal/trem-das-onze.html"></div>
+<hr>
+<div id="verdade" w3-include-html="https://lucasabdalah.github.io/others/abdalah-vocal/verdade.html"></div>
+<hr>
+<div id="pra-batucar" w3-include-html="https://lucasabdalah.github.io/others/abdalah-vocal/pra-batucar.html"></div>
+<hr>
 
-<h3>Ato (Pagode Pop)</h3>
 
-<table>
-  <tr>
-    <!-- Header -->
-    <th>Musica</th>
-    <th>Link</th>
-    <th>Tom</th>
-    <th>Artista</th>
-  </tr>
-  <!-- List -->
-  <tr>
-    <td>Jogo de Seducao</td>
-    <td><a href="https://www.cifraclub.com.br/exaltasamba-musicas/jogo-de-seducao/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>C</td>
-    <td>Exaltasamba</td>
-  </tr>
-  <tr>
-    <td>Coracao Radiante</td>
-    <td><a href="https://www.cifraclub.com.br/revelacao/coracao-radiante/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>C</td>
-    <td>Grupo Revelacao</td>
-  </tr>
-  <tr>
-    <td>Pela vida inteira</td>
-    <td><a href="https://www.cifraclub.com.br/kiloucura/pela-vida-inteira/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>Am</td>
-    <td>Kiloucura</td>
-  </tr>
-  <tr>
-    <td>Teu segredo</td>
-    <td><a href="https://www.cifraclub.com.br/jeito-moleque/teu-segredo/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>C</td>
-    <td>Jeito Moleque</td>
-  </tr>
-  <tr>
-    <td>Preciso te Amar</td>
-    <td><a href="https://www.cifraclub.com.br/revelacao/preciso-te-amar/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>C</td>
-    <td>Grupo Revelacao</td>
-  </tr> 
-  <tr>
-    <td>Camisa 10</td>
-    <td><a href="https://www.cifraclub.com.br/turma-do-pagode/camisa-dez/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>Dm</td>
-    <td>Turma do Pagode</td>
-  </tr>
-</table>
 
-<h3>Ato (Pra cantar junto)</h3>
 
-<table>
-  <tr>
-    <!-- Header -->
-    <th>Musica</th>
-    <th>Artista</th>
-    <th>Link</th>
-    <th>Tom</th>
-  </tr>
-  <!-- List -->
-  <tr>
-    <td>Intro (Jogo de Seducao) + O show tem que continuar</td>
-    <td><a href="https://www.cifraclub.com.br/fundo-de-quintal/o-show-tem-que-continuar/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>C</td>
-    <td>Fundo de Quintal</td>
-  </tr>
-  <tr>
-    <td>Deixa Acontecer</td>
-    <td><a href="https://www.cifraclub.com.br/revelacao/deixa-acontecer/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>Am</td>
-    <td>Grupo Revelacao</td>
-  </tr>
-  <tr>
-    <td>Domingo</td>
-    <td><a href="https://www.cifraclub.com.br/so-pra-contrariar/domingo/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>F</td>
-    <td>So Pra Contrariar</td>
-  </tr>
-  <tr>
-    <td>Tchau e Bença</td>
-    <td><a href="https://www.cifraclub.com.br/exaltasamba-musicas/tchau-e-benca/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>C</td>
-    <td>Exaltasamba</td>
-  </tr>
-  <tr>
-    <td>Livre Pra Voar</td>
-    <td><a href="https://www.cifraclub.com.br/exaltasamba-musicas/livre-pra-voar/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>C</td>
-    <td>Exaltasamba</td>
-  </tr> 
-  <tr>
-    <td>A Gente Bota pra Quebrar</td>
-    <td><a href="https://www.cifraclub.com.br/exaltasamba-musicas/a-gente-bota-pra-quebrar/#tabs=false&instrument=cavaco">Cifra Club</a></td>
-    <td>F</td>
-    <td>Exaltasamba</td>
-  </tr>
-</table>
+<div id="estrela-da-paz" w3-include-html="https://lucasabdalah.github.io/others/abdalah-vocal/estrela-da-paz.html"></div>
+<hr>
 
 </body>
 </html>
 
+<script>
+  includeHTML();
+</script> 
