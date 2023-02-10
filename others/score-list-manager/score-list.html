@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>Dog Title</title>
+<meta charset="utf-8">
+</head>
+<body>
+  
+  <div>
+    <!--Add few elements to the form-->
+    <h1>Save HTML Form data as text File using Javascript / Jquery</h1>
+    <form>
+
+      <div>
+      <input type="text" id="txtName" placeholder="Enter your name" />
+    </div>
+    <div>
+      <input type="text" id="txtAge" placeholder="Enter your age" />
+    </div>
+    <div>
+      <input type="text" id="txtEmail" placeholder="Enter your email address" />
+    </div>
+    <div>
+      <select id="selCountry">
+        <option selected value="">-- Choose the country --</option>
+        <option value="India">India</option>
+        <option value="Japan">Japan</option>
+        <option value="USA">USA</option>
+      </select>
+    </div>
+    <div>
+      <textarea id="msg" name="msg" placeholder="Write some message ..." style="height: 100px;"></textarea>
+    </div>
+    <div>
+      <input type="button" id="bt" value="Save data to file" onclick="saveFile()" />
+      <input type="reset">
+    </div>
+  </div>
+</form>
+  
+  
+  <script>
+
+let saveFile = () => {
+  // Get the data from each element on the form.
+  const name = document.getElementById("txtName");
+  const age = document.getElementById("txtAge");
+  const email = document.getElementById("txtEmail");
+  const country = document.getElementById("selCountry");
+  const msg = document.getElementById("msg");
+
+  // This variable stores all the data.
+  let data = "\r Name: " + name.value + " \r\n " + "Age: " + age.value + " \r\n " + "Email: " + email.value + " \r\n " + "Country: " + country.value + " \r\n " + "Message: " + msg.value;
+  console.log(data); //printing form data into the console
+  // Convert the text to BLOB.
+  const textToBLOB = new Blob([data], { type: "text/plain" });
+  var filename = new Date();
+  var month =new Date(); //months from 1-12
+  month = month.getMonth();
+
+  var day = new Date();
+  var day = day.getUTCDate();
+
+  var year = new Date();
+  var year = year.getUTCFullYear();
+
+  newdate = year + "/" + month + "/" + day;
+  const sFileName = filename; // The file to save the data.
+
+  let newLink = document.createElement("a");
+  newLink.download = new Date();
+
+  if (window.webkitURL != null) {
+      newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+  } else {
+      newLink.href = window.URL.createObjectURL(textToBLOB);
+      newLink.style.display = "none";
+      document.body.appendChild(newLink);
+  }
+
+  newLink.click();
+};
+  </script>
+
+  <!-- <form action="/action_page.php" method="get">
+    <label for="fname">First name:</label>
+    <input type="text" id="fname" name="fname"><br><br>
+    <label for="lname">Last name:</label>
+    <input type="text" id="lname" name="lname"><br><br>
+    <input type="submit" value="Submit using GET">
+    <input type="submit" formmethod="post" value="Submit using POST">
+  </form> 
+  
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="lname" form="form1">
+
+  <form action="/action_page.php">
+    <h1>Cadastro do Jogador</h1>
+    <label for="fname">Nome</label><br>
+    <input type="text" id="fname" name="fname" value=""><br>
+    
+    <input type="radio" id="veterano" name="status" value="veterano">
+    <label for="veterano">veterano</label><br>
+    <input type="radio" id="convidado" name="status" value="convidado">
+    <label for="convidado">convidado</label><br>
+    
+    <label for="quantity">Estrelas (entre 1 e 5):</label>
+    <input type="number" id="quantity" name="quantity" min="1" max="5">
+    
+    <input type="submit" value="Enviar">
+    <input type="reset">
+    </form>
+  
+  <div> </div>
+
+  <form action="/action_page.php">
+    <input list="browsers">
+    <datalist id="browsers">
+      <option value="Internet Explorer">
+      <option value="Firefox">
+      <option value="Chrome">
+      <option value="Opera">
+      <option value="Safari">
+    </datalist>
+  </form> 
+
+  <form action="/action_page.php"
+    oninput="x.value=parseInt(a.value)">
+    0
+    <input type="range"  id="a" name="a" value="0" min="1" max="5">
+    5
+    <br> --- <br>
+    Gols Marcados: 
+    <output name="x" for="a"></output>
+    <br><br>
+  </form>  -->
+
+
+</body>
+</html> 
