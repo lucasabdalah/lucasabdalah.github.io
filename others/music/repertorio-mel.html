@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <style type="text/css">
+    html {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      height: 10%;
+    }
+
+    #main-container {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+
+    #sidebar {
+      display: table-cell;
+      width: 15%;
+      vertical-align: top;
+      background-color: #f1ffba;
+    }
+
+    #sidebar a {
+      display: block;
+      padding: 10px;
+      color: rgba(0, 0, 0, 0.5);
+      margin: 15px 0 0 0;
+      text-decoration: none;
+    }
+
+    #sidebar a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white !important;
+    }
+
+    #content {
+      display: table-cell;
+      width: 100%;
+      vertical-align: top;
+      padding: 5px 0 0 5px;
+      margin: 0 auto;
+      /* Center the container horizontally */
+      /* max-width: 4px; Set your desired maximum width */
+    }
+
+    .content-container {
+      max-width: auto;
+      /* Set your desired maximum width */
+      margin: 0 20px;
+      /* Center the container horizontally */
+      padding: 0 20px;
+      /* Optional padding for the content */
+    }
+
+    .floating-button {
+      position: fixed;
+      top: 20px;
+      right: auto;
+      z-index: 999;
+      background-color: darkseagreen;
+    }
+
+    #scrollToTopBtn {
+      display: none;
+      /* Initially hidden */
+      position: fixed;
+      bottom: 20px;
+      left: auto;
+      z-index: 99;
+      background-color: #555;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    #scrollToTopBtn.show {
+      display: block;
+      /* Show when scrolling */
+    }
+
+    /* CSS for the floating button */
+    #scrollButton {
+      display: none;
+      /* Initially hidden */
+      position: fixed;
+      top: 10;
+      right: 10px;
+      z-index: 999;
+      background-color: #555;
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    #scrollButton.show {
+      display: block;
+      /* Show when scrolling */
+    }
+
+    /* Text-wrap adaptative screen  */
+    /* @media only screen and (max-width: 600px) {
+      pre {
+        white-space: pre-wrap;
+      }
+    } */
+  </style>
+
+  <script>
+    // List of HTML file paths and their corresponding titles
+    var list = `esperancas-perdidas
+trem-das-onze
+agua-de-chuva-no-mar
+conselho
+domingo
+maneiras
+deixa-alagar
+eu-nunca-amei-assim
+meu-ebano
+pe-na-areia
+a-gente-bota-pra-quebrar
+abandonado
+mande-um-sinal
+sinais
+deixa-tudo-como-ta
+ate-que-durou
+inseguranca
+o-amor-nao-tem-culpa
+teu-segredo
+deixa-em-off
+falta-voce
+cilada
+mal-acostumado
+temporal
+melhor-eu-ir-ligando-os-fatos-deixa-eu-te-querer-sonho-de-amor
+o-show-tem-que-continuar
+ta-vendo-aquela-lua
+tchau-e-benca
+livre-pra-voar
+manda-audio
+modo-aviao
+radar
+jogo-de-seducao
+coracao-radiante
+compasso-do-amor
+grades-do-coracao
+deixa-acontecer
+camisa-10
+curtindo-a-vida
+cheia-de-manias
+velocidade-da-luz
+ta-escrito
+role
+ja-que-me-ensinou-a-beber
+bebe-e-vem-me-procurar
+baby-me-atende
+recairei
+eu-vou-tirar-voce-do-cabare
+tapao-na-raba
+meu-pedaco-de-pecado
+pega-o-guanabara
+tem-cabare-essa-noite
+se-for-amor
+segura-o-tchan
+danca-da-cordinha
+na-boquinha-da-garrafa
+desafio
+brincadeira-da-tomada`;
+
+    var basePath = 'https://lucasabdalah.github.io/others/music/abdalah-vocal/';
+    var htmlFiles = [];
+
+    // Split the list by new line to get individual file names
+    var fileNames = list.split('\n');
+
+    // Function to load and display HTML files sequentially
+    function loadHTMLFilesSequentially(index) {
+      if (index >= fileNames.length) {
+        // All HTML files have been loaded
+        console.log(htmlFiles);
+        return;
+      }
+
+      var fileName = fileNames[index];
+      var path = basePath + fileName + '.html';
+      var title = fileName.replace(/-/g, ' ');
+
+      // Create an AJAX request object
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', path, true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // Generate a unique ID for the corresponding <div> element
+          var divId = 'section-' + index;
+
+          // Add the HTML content to the container element
+          var container = document.getElementById('container');
+          container.innerHTML += '<div id="' + divId + '">' + xhr.responseText + '</div>';
+
+          // Create a link in the TOC for the HTML file
+          var link = document.createElement('a');
+          link.href = '#' + divId;
+          link.textContent = title;
+          var tocContainer = document.getElementById('toc');
+          tocContainer.appendChild(link);
+          tocContainer.appendChild(document.createElement('br'));
+
+          // Proceed to load the next HTML file
+          loadHTMLFilesSequentially(index + 1);
+        }
+      };
+      xhr.send();
+
+      // Store the file information in the htmlFiles array
+      htmlFiles.push({ path: path, title: title });
+    }
+
+    // Start loading HTML files sequentially
+    loadHTMLFilesSequentially(0);
+
+    var scrolldelay; // Global variable to store the timeout
+
+    function pageScroll() {
+      var velocity = document.getElementById('velocity').value;
+      var pace = 1000 / velocity;
+
+      window.scrollBy(0, 1);
+
+      scrolldelay = setTimeout(pageScroll, pace);
+    }
+
+    function toggleAutoScroll() {
+      var autoScrollBtn = document.getElementById('autoScrollBtn');
+
+      if (scrolldelay) {
+        clearTimeout(scrolldelay);
+        scrolldelay = null;
+        autoScrollBtn.textContent = 'Auto scroll';
+      } else {
+        pageScroll();
+        autoScrollBtn.textContent = 'Stop scroll';
+      }
+    }
+
+    function updateScrollVelocity() {
+      var velocity = document.getElementById('velocity').value;
+      console.log('Scroll Velocity:', velocity);
+
+      if (scrolldelay) {
+        clearTimeout(scrolldelay);
+        pageScroll();
+      }
+    }
+
+    // Function to scroll to the top of the page
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+
+    // Function to show/hide the scroll-to-top button based on scroll position
+    window.onscroll = function () {
+      var scrollToTopBtn = document.getElementById('scrollToTopBtn');
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        scrollToTopBtn.classList.add('show');
+      } else {
+        scrollToTopBtn.classList.remove('show');
+      }
+    };
+  </script>
+</head>
+
+<body onload="loadHTMLFilesSequentially()">
+  <div id="main-container">
+    <div id="sidebar">
+      <div id="toc">
+        <h2>Lista de Músicas</h2>
+      </div>
+    </div>
+    <div id="content">
+      <h1>Que Banda É Essa? - Mel Texeira</h1>
+      <div class="floating-button">
+        <input type="range" id="velocity" name="velocity" min="1" max="90" oninput="updateScrollVelocity()">
+        <button id="autoScrollBtn" onclick="toggleAutoScroll()">Auto scroll</button>
+        <button id="scrollToTopBtn" onclick="scrollToTop()">Top</button>
+      </div>
+      <div class="content-container">
+        <div id="container"></div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
