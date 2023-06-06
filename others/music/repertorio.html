@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Repertorio - Que Banda É Essa?</title>
+  <style>
+    /* Style the container iframe */
+    #container {
+      display: none;
+      /* Initially hide the container */
+      width: 100%;
+      height: 800px;
+      border: purple;
+      border-style: solid;
+      border-width: 1px;
+    }
+  </style>
+  <script>
+    var linkList = [
+      "a-gente-bota-pra-quebrar",
+      "abandonado",
+      "agua-de-chuva-no-mar",
+      "amiga-da-minha-mulher",
+      "ate-que-durou",
+      "baby-me-atende",
+      "bebe-e-vem-me-procurar",
+      "brincadeira-da-tomada",
+      "burguesinha",
+      "cabide",
+      "calcada",
+      "camarao-que-dorme-a-onda-leva",
+      "camisa-10",
+      "cheia-de-manias",
+      "cilada",
+      "clareou",
+      "coisa-de-pele",
+      "coisinha-do-pai",
+      "compasso-do-amor",
+      "conselho",
+      "coracao-radiante",
+      "curtindo-a-vida",
+      "danca-da-cordinha",
+      "deixa-acontecer",
+      "deixa-alagar",
+      "deixa-em-off",
+      "deixa-eu-te-amar",
+      "deixa-tudo-como-ta",
+      "desafio",
+      "disritmia",
+      "domingo",
+      "esperancas-perdidas",
+      "estrela-da-paz",
+      "eu-nunca-amei-assim",
+      "eu-vou-tirar-voce-do-cabare",
+      "ex-amor",
+      "falta-voce",
+      "fermento-pra-massa",
+      "grades-do-coracao",
+      "inseguranca",
+      "insensato-destino",
+      "ive-brussel",
+      "ja-que-me-ensinou-a-beber",
+      "jogo-de-seducao",
+      "livre-pra-voar",
+      "mal-acostumado",
+      "manda-audio",
+      "mande-um-sinal",
+      "maneiras",
+      "marinheiro-so",
+      "melhor-eu-ir-ligando-os-fatos-deixa-eu-te-querer-sonho-de-amor",
+      "menina-mulher-da-pele-preta",
+      "meu-ebano",
+      "meu-lugar",
+      "meu-pedaco-de-pecado",
+      "modo-aviao",
+      "mulheres",
+      "na-boquinha-da-garrafa",
+      "nao-deixe-o-samba-morrer",
+      "o-amor-nao-tem-culpa",
+      "o-show-tem-que-continuar",
+      "o-telefone-tocou-novamente",
+      "ogum",
+      "pe-na-areia",
+      "pega-o-guanabara",
+      "preciso-me-encontrar",
+      "quando-a-gira-girou",
+      "radar",
+      "recairei",
+      "retalhos-de-cetim",
+      "role",
+      "se-a-fila-andar",
+      "se-for-amor",
+      "segura-o-tchan",
+      "sinais",
+      "sonho-meu",
+      "ta-escrito",
+      "ta-vendo-aquela-lua",
+      "taj-mahal-fio-maravilha-pais-tropical",
+      "tapao-na-raba",
+      "tchau-e-benca",
+      "tem-cabare-essa-noite",
+      "temporal",
+      "teu-segredo",
+      "trem-das-onze",
+      "vai-vadiar",
+      "velocidade-da-luz",
+      "vou-festejar",
+      // Add more titles to the list
+    ];
+
+    function populateOptions() {
+      var datalist = document.getElementById("linkList");
+      var commonPath = "https://lucasabdalah.github.io/others/music/abdalah-vocal/";
+
+      linkList.forEach(function (title) {
+        var link = commonPath + title + ".html";
+        var option = document.createElement("option");
+        option.value = link;
+        option.text = title.replace(/-/g, ' ');
+        datalist.appendChild(option);
+      });
+    }
+
+    function toggleContainer() {
+      var container = document.getElementById("container");
+      var input = document.getElementById("searchInput");
+      var selectedLink = input.value;
+      if (container.style.display === "none") {
+        container.style.display = "block";
+        container.src = selectedLink; // Set the src attribute to the selected link
+      } else {
+        container.style.display = "none";
+        container.src = ""; // Clear the src attribute when hiding the container
+      }
+    }
+
+    function showTable() {
+      var tableContainer = document.getElementById("tableContainer");
+      var table = document.createElement("table");
+      var tbody = document.createElement("tbody");
+
+      for (var i = 0; i < linkList.length; i++) {
+        var link = linkList[i];
+        var title = link.split("/").pop().replace(".html", "").replace(/-/g, " ");
+        title = title.charAt(0).toUpperCase() + title.slice(1); // Capitalize first letter
+        var row = document.createElement("tr");
+        var cell = document.createElement("td");
+        cell.innerHTML = title;
+        row.appendChild(cell);
+        tbody.appendChild(row);
+      }
+
+      table.appendChild(tbody);
+      tableContainer.appendChild(table);
+    }
+
+  </script>
+</head>
+
+<body onload="populateOptions()">
+  <h1>Repertorio</h1>
+
+  <h2>Passados</h2>
+  <a href="https://lucasabdalah.github.io/others/music/repertorio-carol.html" target="_blank">Aniversario Carol Texeira (Samba)</a>
+  <br>
+  <a href="https://lucasabdalah.github.io/others/music/repertorio-mel.html" target="_blank">Aniversario Mel Texeira (Samba)</a>
+
+  <h2>Músicas Ensaiadas</h2>
+
+
+  <!-- Searchable dropdown list with input -->
+  <input type="text" id="searchInput" list="linkList" placeholder="Search...">
+  <datalist id="linkList">
+    <!-- Options will be populated dynamically -->
+  </datalist>
+  <!-- Button to toggle the container -->
+  <button onclick="toggleContainer()">Exibir</button>
+
+
+  <!-- The iframe as a container -->
+  <iframe id="container" src=""></iframe>
+
+  <!-- Other content of the container page -->
+  <!-- <p></p> -->
+
+  <hr>
+
+  <!-- Element to display the table -->
+  <div id="tableContainer"><b>Lista de Músicas</b></div>
+
+  <script>
+    // Call the function to show the table
+    showTable();
+  </script>
+
+</body>
+
+</html>
