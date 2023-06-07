@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Team Matches</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Team Matches</h1>
+
+  <table>
+    <tr>
+      <th>Team</th>
+      <th>Player</th>
+      <th>Match 1</th>
+      <th>Match 2</th>
+      <th>Points</th>
+      <th>Victories</th>
+      <th>Score Pro</th>
+    </tr>
+    <tr>
+      <td rowspan="6">A</td>
+      <td><input type="text" name="A_player1" /></td>
+      <td><input type="number" name="A_player1_match1" /></td>
+      <td><input type="number" name="A_player1_match2" /></td>
+      <td id="A_player1_points"></td>
+      <td id="A_player1_victories"></td>
+      <td id="A_player1_score_pro"></td>
+    </tr>
+    <tr>
+      <td><input type="text" name="A_player2" /></td>
+      <td><input type="number" name="A_player2_match1" /></td>
+      <td><input type="number" name="A_player2_match2" /></td>
+      <td id="A_player2_points"></td>
+      <td id="A_player2_victories"></td>
+      <td id="A_player2_score_pro"></td>
+    </tr>
+    <!-- Repeat the above two rows for the remaining players of Team A -->
+    <!-- Total rows for Team A: 6 -->
+
+    <tr>
+      <td rowspan="6">B</td>
+      <td><input type="text" name="B_player1" /></td>
+      <td><input type="number" name="B_player1_match1" /></td>
+      <td><input type="number" name="B_player1_match2" /></td>
+      <td id="B_player1_points"></td>
+      <td id="B_player1_victories"></td>
+      <td id="B_player1_score_pro"></td>
+    </tr>
+    <tr>
+      <td><input type="text" name="B_player2" /></td>
+      <td><input type="number" name="B_player2_match1" /></td>
+      <td><input type="number" name="B_player2_match2" /></td>
+      <td id="B_player2_points"></td>
+      <td id="B_player2_victories"></td>
+      <td id="B_player2_score_pro"></td>
+    </tr>
+    <!-- Repeat the above two rows for the remaining players of Team B -->
+    <!-- Total rows for Team B: 6 -->
+
+    <tr>
+      <td rowspan="6">C</td>
+      <td><input type="text" name="C_player1" /></td>
+      <td><input type="number" name="C_player1_match1" /></td>
+      <td><input type="number" name="C_player1_match2" /></td>
+      <td id="C_player1_points"></td>
+      <td id="C_player1_victories"></td>
+      <td id="C_player1_score_pro"></td>
+    </tr>
+    <tr>
+      <td><input type="text" name="C_player2" /></td>
+      <td><input type="number" name="C_player2_match1" /></td>
+      <td><input type="number" name="C_player2_match2" /></td>
+      <td id="C_player2_points"></td>
+      <td id="C_player2_victories"></td>
+      <td id="C_player2_score_pro"></td>
+    </tr>
+    <!-- Repeat the above two rows for the remaining players of Team C -->
+    <!-- Total rows for Team C: 6 -->
+
+    <tr>
+      <td rowspan="6">D</td>
+      <td><input type="text" name="D_player1" /></td>
+      <td><input type="number" name="D_player1_match1" /></td>
+      <td><input type="number" name="D_player1_match2" /></td>
+      <td id="D_player1_points"></td>
+      <td id="D_player1_victories"></td>
+      <td id="D_player1_score_pro"></td>
+    </tr>
+    <tr>
+      <td><input type="text" name="D_player2" /></td>
+      <td><input type="number" name="D_player2_match1" /></td>
+      <td><input type="number" name="D_player2_match2" /></td>
+      <td id="D_player2_points"></td>
+      <td id="D_player2_victories"></td>
+      <td id="D_player2_score_pro"></td>
+    </tr>
+    <!-- Repeat the above two rows for the remaining players of Team D -->
+    <!-- Total rows for Team D: 6 -->
+  </table>
+
+  <script>
+    // Calculate and update the points, victories, and score pro for each player
+    function calculateResults() {
+      let teams = ['A', 'B', 'C', 'D'];
+
+      for (let i = 0; i < teams.length; i++) {
+        let team = teams[i];
+
+        for (let j = 1; j <= 6; j++) {
+          let playerPoints = calculatePlayerPoints(team, j);
+          let playerVictories = calculatePlayerVictories(team, j);
+          let playerScorePro = calculatePlayerScorePro(team, j);
+
+          document.getElementById(team + '_player' + j + '_points').textContent = playerPoints;
+          document.getElementById(team + '_player' + j + '_victories').textContent = playerVictories;
+          document.getElementById(team + '_player' + j + '_score_pro').textContent = playerScorePro;
+        }
+      }
+    }
+
+    // Calculate the total points for a player
+    function calculatePlayerPoints(team, playerNumber) {
+      let match1 = parseInt(document.getElementsByName(team + '_player' + playerNumber + '_match1')[0].value) || 0;
+      let match2 = parseInt(document.getElementsByName(team + '_player' + playerNumber + '_match2')[0].value) || 0;
+
+      return match1 + match2;
+    }
+
+    // Calculate the total victories for a player
+    function calculatePlayerVictories(team, playerNumber) {
+      let match1 = parseInt(document.getElementsByName(team + '_player' + playerNumber + '_match1')[0].value) || 0;
+      let match2 = parseInt(document.getElementsByName(team + '_player' + playerNumber + '_match2')[0].value) || 0;
+
+      return (match1 > 0 ? 1 : 0) + (match2 > 0 ? 1 : 0);
+    }
+
+    // Calculate the score pro for a player
+    function calculatePlayerScorePro(team, playerNumber) {
+      let match1 = parseInt(document.getElementsByName(team + '_player' + playerNumber + '_match1')[0].value) || 0;
+      let match2 = parseInt(document.getElementsByName(team + '_player' + playerNumber + '_match2')[0].value) || 0;
+
+      return match1 + match2;
+    }
+
+    // Attach event listener to input elements
+    let inputElements = document.getElementsByTagName('input');
+    for (let i = 0; i < inputElements.length; i++) {
+      inputElements[i].addEventListener('input', calculateResults);
+    }
+  </script>
+</body>
+</html>
