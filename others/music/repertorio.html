@@ -11,7 +11,7 @@
       display: none;
       /* Initially hide the container */
       width: 100%;
-      height: 90vh;
+      height: 120vh;
       /* Adjust the height as per your requirement */
       border: purple;
       border-style: solid;
@@ -26,11 +26,11 @@
     }
 
     .column {
-      flex-basis: 50%;
+      flex-basis: 80%;
     }
 
     .narrow-column {
-      flex-basis: 20%;
+      flex-basis: 10%;
     }
   </style>
   <script>
@@ -191,7 +191,6 @@
       tableContainer.appendChild(table);
     }
 
-
   </script>
 </head>
 
@@ -213,12 +212,12 @@
     <div class="column narrow-column">
       <!-- Searchable dropdown list with input -->
       <input type="text" id="searchInput" list="linkList" placeholder="Search...">
-      <datalist id="linkList">
+      <datalist id="linkList"><!-- Auto Scroll Controls -->
+
         <!-- Options will be populated dynamically -->
       </datalist>
       <!-- Button to toggle the container -->
       <button onclick="toggleContainer()">Exibir</button>
-
       <!-- Element to display the table -->
       <div id="tableContainer"><b>Lista de Músicas</b></div>
     </div>
