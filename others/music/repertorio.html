@@ -4,15 +4,33 @@
 <head>
   <title>Repertorio - Que Banda É Essa?</title>
   <style>
-    /* Style the container iframe */
+    /* Style for the container iframe */
+    /* Style for the container iframe */
+    /* Style for the container iframe */
     #container {
       display: none;
       /* Initially hide the container */
       width: 100%;
-      height: 800px;
+      height: 90vh;
+      /* Adjust the height as per your requirement */
       border: purple;
       border-style: solid;
       border-width: 1px;
+      flex-grow: 1;
+    }
+
+    /* Style for the two columns */
+    .container {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .column {
+      flex-basis: 50%;
+    }
+
+    .narrow-column {
+      flex-basis: 20%;
     }
   </style>
   <script>
@@ -105,12 +123,13 @@
       "vai-vadiar",
       "velocidade-da-luz",
       "vou-festejar",
-      // Add more titles to the list
+      // Rest of the linkList entries
     ];
+
+    var commonPath = "https://lucasabdalah.github.io/others/music/abdalah-vocal/";
 
     function populateOptions() {
       var datalist = document.getElementById("linkList");
-      var commonPath = "https://lucasabdalah.github.io/others/music/abdalah-vocal/";
 
       linkList.forEach(function (title) {
         var link = commonPath + title + ".html";
@@ -128,9 +147,11 @@
       if (container.style.display === "none") {
         container.style.display = "block";
         container.src = selectedLink; // Set the src attribute to the selected link
+        document.getElementById("toggleButton").textContent = "Fechar";
       } else {
         container.style.display = "none";
         container.src = ""; // Clear the src attribute when hiding the container
+        document.getElementById("toggleButton").textContent = "Exibir";
       }
     }
 
@@ -143,9 +164,25 @@
         var link = linkList[i];
         var title = link.split("/").pop().replace(".html", "").replace(/-/g, " ");
         title = title.charAt(0).toUpperCase() + title.slice(1); // Capitalize first letter
+
         var row = document.createElement("tr");
         var cell = document.createElement("td");
-        cell.innerHTML = title;
+        var linkElement = document.createElement("a");
+
+        var targetLink = commonPath + link + ".html";
+        linkElement.href = "javascript:void(0)";
+        linkElement.textContent = title;
+
+        // Create a closure by wrapping the event listener code in a separate function
+        (function (link) {
+          linkElement.addEventListener("click", function () {
+            var container = document.getElementById("container");
+            container.style.display = "block";
+            container.src = link;
+          });
+        })(targetLink);
+
+        cell.appendChild(linkElement);
         row.appendChild(cell);
         tbody.appendChild(row);
       }
@@ -154,6 +191,7 @@
       tableContainer.appendChild(table);
     }
 
+
   </script>
 </head>
 
@@ -161,32 +199,36 @@
   <h1>Repertorio</h1>
 
   <h2>Passados</h2>
-  <a href="https://lucasabdalah.github.io/others/music/repertorio-carol.html" target="_blank">Aniversario Carol Texeira (Samba)</a>
+  <a href="https://lucasabdalah.github.io/others/music/repertorio-carol.html" target="_blank">Aniversario Carol Texeira
+    (Samba)</a>
   <br>
-  <a href="https://lucasabdalah.github.io/others/music/repertorio-mel.html" target="_blank">Aniversario Mel Texeira (Samba)</a>
+  <a href="https://lucasabdalah.github.io/others/music/repertorio-mel.html" target="_blank">Aniversario Mel Texeira
+    (Samba)</a>
 
   <h2>Músicas Ensaiadas</h2>
 
+  <!-- The container for the two columns -->
+  <div class="container">
+    <!-- The narrow column with search bar and list -->
+    <div class="column narrow-column">
+      <!-- Searchable dropdown list with input -->
+      <input type="text" id="searchInput" list="linkList" placeholder="Search...">
+      <datalist id="linkList">
+        <!-- Options will be populated dynamically -->
+      </datalist>
+      <!-- Button to toggle the container -->
+      <button onclick="toggleContainer()">Exibir</button>
 
-  <!-- Searchable dropdown list with input -->
-  <input type="text" id="searchInput" list="linkList" placeholder="Search...">
-  <datalist id="linkList">
-    <!-- Options will be populated dynamically -->
-  </datalist>
-  <!-- Button to toggle the container -->
-  <button onclick="toggleContainer()">Exibir</button>
+      <!-- Element to display the table -->
+      <div id="tableContainer"><b>Lista de Músicas</b></div>
+    </div>
 
-
-  <!-- The iframe as a container -->
-  <iframe id="container" src=""></iframe>
-
-  <!-- Other content of the container page -->
-  <!-- <p></p> -->
-
-  <hr>
-
-  <!-- Element to display the table -->
-  <div id="tableContainer"><b>Lista de Músicas</b></div>
+    <!-- The larger column for the container -->
+    <div class="column">
+      <!-- The iframe as a container -->
+      <iframe id="container" src=""></iframe>
+    </div>
+  </div>
 
   <script>
     // Call the function to show the table
