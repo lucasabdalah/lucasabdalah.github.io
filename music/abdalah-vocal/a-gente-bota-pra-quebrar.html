@@ -7,81 +7,8 @@
     font-weight: bold;
   }
 
-  .floating-button {
-    position: fixed;
-    top: 20px;
-    right: auto;
-    z-index: 999;
-    background-color: darkseagreen;
-  }
-
-  /* CSS for the floating button */
-  #scrollButton {
-    display: none;
-    /* Initially hidden */
-    position: fixed;
-    top: 10;
-    right: 10px;
-    z-index: 999;
-    background-color: #555;
-    color: #fff;
-    border: none;
-    border-radius: 2px;
-    padding: 5px;
-    cursor: pointer;
-  }
 </style>
 
-<script>
-  var scrolldelay; // Global variable to store the timeout
-
-  function pageScroll() {
-    var velocity = document.getElementById('velocity').value;
-    var pace = 1000 / velocity;
-
-    window.scrollBy(0, 1);
-
-    scrolldelay = setTimeout(pageScroll, pace);
-  }
-
-  function toggleAutoScroll() {
-    var autoScrollBtn = document.getElementById('autoScrollBtn');
-
-    if (scrolldelay) {
-      clearTimeout(scrolldelay);
-      scrolldelay = null;
-      autoScrollBtn.textContent = 'Auto scroll';
-    } else {
-      pageScroll();
-      autoScrollBtn.textContent = 'Stop scroll';
-    }
-  }
-
-  function updateScrollVelocity() {
-    var velocity = document.getElementById('velocity').value;
-    console.log('Scroll Velocity:', velocity);
-
-    if (scrolldelay) {
-      clearTimeout(scrolldelay);
-      pageScroll();
-    }
-  }
-
-  // Function to scroll to the top of the page
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  }
-
-  // Function to show/hide the scroll-to-top button based on scroll position
-  window.onscroll = function () {
-    var scrollToTopBtn = document.getElementById('scrollToTopBtn');
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      scrollToTopBtn.classList.add('show');
-    } else {
-      scrollToTopBtn.classList.remove('show');
-    }
-  };
-</script>
 </head>
 
 <title>A Gente Bota pra Quebrar - Exaltasamba</title>
@@ -90,11 +17,7 @@
 <p><a href="link">Cifra Club</a></p>
 
 <body>
-  <div class="floating-button">
-    <input type="range" id="velocity" name="velocity" min="1" max="90" oninput="updateScrollVelocity()">
-    <button id="autoScrollBtn" onclick="toggleAutoScroll()">Auto scroll</button>
-    <button id="scrollToTopBtn" onclick="scrollToTop()">Top</button>
-  </div>
+ 
   <pre style="font-size: 20px">
     [Intro] <b>Dm7/9</b>  <b>A7/13-</b> <b>Dm7/9</b> 
     <b>Dm7/9</b>  <b>A7/13-</b> <b>Dm7/9</b> 
