@@ -1,36 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Repertorio - Que Banda É Essa?</title>
   <style>
-    /* Style for the container iframe */
-    /* Style for the container iframe */
-    /* Style for the container iframe */
-    #container {
-      display: none;
-      /* Initially hide the container */
-      width: 100%;
-      height: 120vh;
-      /* Adjust the height as per your requirement */
-      border: purple;
-      border-style: solid;
-      border-width: 1px;
-      flex-grow: 1;
+    body {
+      font-size: 18px;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      /* Remove default margin */
+      padding: 0;
+      /* Remove default padding */
     }
 
-    /* Style for the two columns */
+    header {
+      background-color: #bae1ff;
+      color: black;
+      padding: 15px;
+      text-align: center;
+    }
+
+    h1,
+    h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      /* Add some spacing below headings */
+    }
+
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 12px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
     .container {
       display: flex;
       flex-direction: row;
+      align-items: flex-start;
     }
 
     .column {
-      flex-basis: 80%;
+      flex: 1;
+      /* Make the column take full available width */
+      padding: 10px;
     }
 
-    .narrow-column {
-      flex-basis: 10%;
+    .alphabet-links {
+      margin-bottom: 10px;
+    }
+
+    .alphabet-links a {
+      margin-right: 10px;
+    }
+
+    .separator {
+      background-color: #bae1ff;
+      /* Change the background color to your preferred color */
+      color: black;
+      /* Change the text color to white or another contrasting color */
+      text-align: center;
+      /* Center the text within the cell */
+      padding: 8px;
+      /* Add padding for better appearance */
+      font-weight: bold;
+      /* Make the text bold */
     }
   </style>
   <script>
@@ -126,6 +195,7 @@
       // Rest of the linkList entries
     ];
 
+
     var commonPath = "https://lucasabdalah.github.io/music/abdalah-vocal/";
 
     function populateOptions() {
@@ -144,36 +214,45 @@
       var container = document.getElementById("container");
       var input = document.getElementById("searchInput");
       var selectedLink = input.value;
-      if (container.style.display === "none") {
-        container.style.display = "block";
-        container.src = selectedLink; // Set the src attribute to the selected link
-        document.getElementById("toggleButton").textContent = "Fechar";
-      } else {
-        container.style.display = "none";
-        container.src = ""; // Clear the src attribute when hiding the container
-        document.getElementById("toggleButton").textContent = "Exibir";
+      if (selectedLink) {
+        window.open(selectedLink, '_blank');
       }
     }
-
     function showTable() {
       var tableContainer = document.getElementById("tableContainer");
       var table = document.createElement("table");
       var tbody = document.createElement("tbody");
 
+      var initialLetters = [];
+
       for (var i = 0; i < linkList.length; i++) {
         var link = linkList[i];
         var title = link.split("/").pop().replace(".html", "").replace(/-/g, " ");
-        title = title.charAt(0).toUpperCase() + title.slice(1); // Capitalize first letter
+        title = title.charAt(0).toUpperCase() + title.slice(1);
+
+        var initialLetter = title.charAt(0).toUpperCase();
+        if (!initialLetters.includes(initialLetter)) {
+          initialLetters.push(initialLetter);
+
+          // Add a separator row for each initial letter
+          var separatorRow = document.createElement("tr");
+          var separatorCell = document.createElement("td");
+          separatorCell.colSpan = 2; // Span across two columns
+          separatorCell.textContent = initialLetter;
+          separatorCell.className = "separator"; // Apply the "separator" class
+          separatorRow.appendChild(separatorCell);
+          tbody.appendChild(separatorRow);
+        }
 
         var row = document.createElement("tr");
         var cell = document.createElement("td");
         var linkElement = document.createElement("a");
 
         var targetLink = commonPath + link + ".html";
-        linkElement.href = "javascript:void(0)";
+        linkElement.href = targetLink;
+        linkElement.target = "_blank";
         linkElement.textContent = title;
 
-        // Create a closure by wrapping the event listener code in a separate function
         (function (link) {
           linkElement.addEventListener("click", function () {
             var container = document.getElementById("container");
@@ -190,26 +269,36 @@
       table.appendChild(tbody);
       tableContainer.appendChild(table);
     }
-
   </script>
+
 </head>
 
 <body onload="populateOptions()">
-  <h1>Repertorio</h1>
+  <header>
+    <h1>Repertorio</h1>
+  </header>
 
-  <h2>Passados</h2>
-  <a href="https://lucasabdalah.github.io/music/repertorio-carol.html" target="_blank">Aniversario Carol Texeira
-    (Samba)</a>
-  <br>
-  <a href="https://lucasabdalah.github.io/music/repertorio-mel.html" target="_blank">Aniversario Mel Texeira
-    (Pagode/Samba)</a>
-    <br>
-    <a href="https://lucasabdalah.github.io/music/repertorio-casamento.html" target="_blank">Casamento Gabs e Bia
-      (Samba)</a>
-    <br>
-    <a href="https://lucasabdalah.github.io/music/repertorio-motta.html" target="_blank">Despedida do Motta
-      (Samba)</a>
-  <h2>Músicas Ensaiadas</h2>
+  <h2>Repertorios Passados</h2>
+  <table>
+    <tr>
+      <td><a href="https://lucasabdalah.github.io/music/repertorio-carol.html" target="_blank">Aniversario Carol Texeira
+          (Samba)</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://lucasabdalah.github.io/music/repertorio-mel.html" target="_blank">Aniversario Mel Texeira
+          (Pagode/Samba)</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://lucasabdalah.github.io/music/repertorio-casamento.html" target="_blank">Casamento Gabs e Bia
+          (Samba)</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://lucasabdalah.github.io/music/repertorio-motta.html" target="_blank">Despedida do Motta
+          (Samba)</a></td>
+    </tr>
+  </table>
+
+  <h2>Buscar Musicas</h2>
 
   <!-- The container for the two columns -->
   <div class="container">
@@ -217,28 +306,30 @@
     <div class="column narrow-column">
       <!-- Searchable dropdown list with input -->
       <input type="text" id="searchInput" list="linkList" placeholder="Search...">
-      <datalist id="linkList"><!-- Auto Scroll Controls -->
-
+      <datalist id="linkList">
         <!-- Options will be populated dynamically -->
       </datalist>
       <!-- Button to toggle the container -->
       <button onclick="toggleContainer()">Exibir</button>
+      <hr>
       <!-- Element to display the table -->
-      <div id="tableContainer"><b>Lista de Músicas</b></div>
-    </div>
-
-    <!-- The larger column for the container -->
-    <div class="column">
-      <!-- The iframe as a container -->
-      <iframe id="container" src=""></iframe>
+      <div id="tableContainer"><b>Lista de Musicas</b></div>
     </div>
   </div>
 
   <script>
     // Call the function to show the table
     showTable();
-  </script>
 
+    function toggleContainer() {
+      var input = document.getElementById("searchInput");
+      var selectedLink = input.value;
+
+      if (selectedLink) {
+        window.open(selectedLink, '_blank');
+      }
+    }
+  </script>
 </body>
 
 </html>
