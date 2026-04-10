@@ -28,7 +28,7 @@
       min-height: 100vh;
     }
 
- #content {
+    #content {
       display: inline-block;
       min-width: 100%;
       padding: 20px 24px 48px 24px;
@@ -94,7 +94,8 @@
 
     /* content container where songs are injected */
     .content-container {
-      max-width: 1200px;  /* Antes era 1000px */
+      max-width: 1200px;
+      /* Antes era 1000px */
       margin: 0 auto;
     }
 
@@ -183,14 +184,16 @@
       font-weight: bold;
     }
 
-        /* responsive - apenas para telas pequenas */
+    /* responsive - apenas para telas pequenas */
     @media (max-width: 780px) {
       #content {
         padding: 16px 16px 48px 16px;
       }
+
       .setlist-header {
         padding: 1rem 1.2rem;
       }
+
       .floating-controls {
         bottom: 16px;
         right: 16px;
@@ -204,33 +207,36 @@
       max-width: 100%;
     }
 
-  @media (max-width: 480px) {
-    .setlist-header {
-      padding: 0.8rem 1rem;
+    @media (max-width: 480px) {
+      .setlist-header {
+        padding: 0.8rem 1rem;
+      }
+
+      /* FAZ AS BADGES FICAREM UMA POR LINHA */
+      .setlist-grid {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .setlist-badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+        width: 100%;
+        /* Ocupa toda largura */
+        text-align: left;
+        /* ALINHA O TEXTO À ESQUERDA */
+      }
+
+      .song-card>div {
+        padding: 0.8rem 1rem;
+      }
+
+      .floating-controls button,
+      .floating-controls .vel-wrapper {
+        padding: 4px 10px;
+        font-size: 0.7rem;
+      }
     }
-    
-    /* FAZ AS BADGES FICAREM UMA POR LINHA */
-    .setlist-grid {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    
-    .setlist-badge {
-      font-size: 0.8rem;
-      padding: 0.4rem 1rem;
-      width: 100%;           /* Ocupa toda largura */
-      text-align: left;      /* ALINHA O TEXTO À ESQUERDA */
-    }
-    
-    .song-card > div {
-      padding: 0.8rem 1rem;
-    }
-    .floating-controls button, 
-    .floating-controls .vel-wrapper {
-      padding: 4px 10px;
-      font-size: 0.7rem;
-    }
-  }
   </style>
 </head>
 
@@ -240,7 +246,8 @@
     <!-- **************  SETLIST DISPLAYED AT THE TOP (BEFORE ANY SONG) ************** -->
     <div class="setlist-header" id="top-setlist">
       <h2> Setlist · Baquit 2026 <span class="setlist-count" id="songCountBadge"></span></h2>
-      <p style="margin: 0 0 6px 0; color: #3a2e1f; font-weight: 500;">⬇️ ordem da apresentação — clique no título para navegar</p>
+      <p style="margin: 0 0 6px 0; color: #3a2e1f; font-weight: 500;">⬇️ ordem da apresentação — clique no título para
+        navegar</p>
       <div id="dynamic-setlist-grid" class="setlist-grid">
         <!-- dynamic setlist badges will appear here once songs load -->
         <span class="setlist-badge" style="background:#8b7a62;">carregando repertório...</span>
@@ -254,10 +261,12 @@
   </div>
 
   <!-- floating buttons: auto-scroll + top -->
+   
   <div class="floating-controls">
     <div class="vel-wrapper">
-      <span style="font-size:0.75rem;">⚡</span>
-      <input type="range" id="velocity" name="velocity" min="1" max="200" value="35">
+      <span style="font-size:0.75rem;">Ritmo</span>
+      <input type="range" id="velocity" name="velocity" min="0" max="100" value="35">
+      <span id="velPercent" style="font-size:0.7rem; min-width: 35px;">35%</span>
     </div>
     <button id="autoScrollBtn">▶ Auto scroll</button>
     <button id="scrollToTopBtn">⬆ Topo</button>
@@ -267,17 +276,17 @@
     // ---------- SONG LIST (exactly from original "list" variable) ----------
     var rawList = `esperancas-perdidas
 trem-das-onze
+feijoada-completa-chico-buarque
 coisa-de-pele
 conselho
 domingo
-feijoada-completa-chico-buarque
-agua-de-chuva-no-mar
 a-rita-chico-buarque
 ja-e-jorge-aragao
-cabide
-telegrama-zeca-baleiro
-nao-deixe-o-samba-morrer
 mande-um-sinal
+cabide
+agua-de-chuva-no-mar
+meu-lugar
+nao-deixe-o-samba-morrer
 disritmia
 deixa-eu-te-amar
 ex-amor
@@ -287,16 +296,16 @@ vou-festejar
 maneiras
 final-feliz-jorge-vercilo
 fato-consumado-djavan
-cilada
 burguesinha
 ive-brussel
 inseguranca
 eu-e-voce-sempre
+telegrama-zeca-baleiro
 o-telefone-tocou-novamente
 menina-mulher-da-pele-preta
 pe-na-areia
-meu-lugar
 mal-acostumado
+cilada
 o-show-tem-que-continuar
 modo-aviao
 radar
@@ -369,97 +378,97 @@ brincadeira-da-tomada`;
     }
 
     // Load all html files sequentially and inject into #container + build sidebar + update setlist header
-      // Load all html files sequentially and inject into #container
-  function loadAllSongs() {
-    var container = document.getElementById('container');
-    var tocContainer = document.getElementById('toc-links-container');
-    if (!container) return;
-    container.innerHTML = '';   // clear any placeholder
-    if (tocContainer) tocContainer.innerHTML = ''; // reset sidebar links (se existir)
+    // Load all html files sequentially and inject into #container
+    function loadAllSongs() {
+      var container = document.getElementById('container');
+      var tocContainer = document.getElementById('toc-links-container');
+      if (!container) return;
+      container.innerHTML = '';   // clear any placeholder
+      if (tocContainer) tocContainer.innerHTML = ''; // reset sidebar links (se existir)
 
-    let currentIndex = 0;
-    function loadNext() {
-      if (currentIndex >= fileNames.length) {
-        console.log('All songs loaded ✓');
-        // after all songs are loaded, render setlist badges on top
-        renderSetlistHeader();
-        return;
-      }
+      let currentIndex = 0;
+      function loadNext() {
+        if (currentIndex >= fileNames.length) {
+          console.log('All songs loaded ✓');
+          // after all songs are loaded, render setlist badges on top
+          renderSetlistHeader();
+          return;
+        }
 
-      var fileName = fileNames[currentIndex];
-      var path = basePath + fileName + '.html';
-      var title = kebabToTitle(fileName);
-      var sectionId = 'song-' + currentIndex + '-' + fileName.replace(/_/g, '');
-      
-      // store in setlistItems before loading
-      setlistItems.push({
-        id: currentIndex,
-        title: title,
-        elementId: sectionId,
-        fileName: fileName
-      });
+        var fileName = fileNames[currentIndex];
+        var path = basePath + fileName + '.html';
+        var title = kebabToTitle(fileName);
+        var sectionId = 'song-' + currentIndex + '-' + fileName.replace(/_/g, '');
 
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', path, true);
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            // create card wrapper for each song
-            var songWrapper = document.createElement('div');
-            songWrapper.id = sectionId;
-            songWrapper.className = 'song-card';
-            // inner structure: we can add a small header inside each card optionally
-            var innerHtml = `<div><div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom: 2px dotted #e5d9c4; margin-bottom: 12px; padding-bottom: 6px;"><h3 style="margin:0; font-size:1.5rem; color:#4a3b28;"></h3><span style="font-size:0.75rem; background:#ece2d0; padding:2px 10px; border-radius:20px;">#${currentIndex+1}</span></div>${xhr.responseText}</div>`;
-            songWrapper.innerHTML = innerHtml;
-            container.appendChild(songWrapper);
-            
-            // Add TOC link in sidebar (se o container existir)
-            if (tocContainer) {
-              var link = document.createElement('a');
-              link.href = '#' + sectionId;
-              link.textContent = (currentIndex+1) + '. ' + title;
-              link.setAttribute('data-toc-id', sectionId);
-              tocContainer.appendChild(link);
+        // store in setlistItems before loading
+        setlistItems.push({
+          id: currentIndex,
+          title: title,
+          elementId: sectionId,
+          fileName: fileName
+        });
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', path, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              // create card wrapper for each song
+              var songWrapper = document.createElement('div');
+              songWrapper.id = sectionId;
+              songWrapper.className = 'song-card';
+              // inner structure: we can add a small header inside each card optionally
+              var innerHtml = `<div><div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom: 2px dotted #e5d9c4; margin-bottom: 12px; padding-bottom: 6px;"><h3 style="margin:0; font-size:1.5rem; color:#4a3b28;"></h3><span style="font-size:0.75rem; background:#ece2d0; padding:2px 10px; border-radius:20px;">#${currentIndex + 1}</span></div>${xhr.responseText}</div>`;
+              songWrapper.innerHTML = innerHtml;
+              container.appendChild(songWrapper);
+
+              // Add TOC link in sidebar (se o container existir)
+              if (tocContainer) {
+                var link = document.createElement('a');
+                link.href = '#' + sectionId;
+                link.textContent = (currentIndex + 1) + '. ' + title;
+                link.setAttribute('data-toc-id', sectionId);
+                tocContainer.appendChild(link);
+              }
+            } else {
+              // fallback for missing files
+              console.warn(`Failed to load ${path} (status ${xhr.status})`);
+              var errorDiv = document.createElement('div');
+              errorDiv.id = sectionId;
+              errorDiv.className = 'song-card';
+              errorDiv.innerHTML = `<div><h3 style="color:#b1624b;">⚠️ ${title}</h3><p style="color: gray;">Conteúdo indisponível ou erro no carregamento. <br> <small>${path}</small></p></div>`;
+              container.appendChild(errorDiv);
+              if (tocContainer) {
+                var errLink = document.createElement('a');
+                errLink.href = '#' + sectionId;
+                errLink.textContent = (currentIndex + 1) + '. ' + title + ' (indisponível)';
+                tocContainer.appendChild(errLink);
+              }
             }
-          } else {
-            // fallback for missing files
-            console.warn(`Failed to load ${path} (status ${xhr.status})`);
-            var errorDiv = document.createElement('div');
-            errorDiv.id = sectionId;
-            errorDiv.className = 'song-card';
-            errorDiv.innerHTML = `<div><h3 style="color:#b1624b;">⚠️ ${title}</h3><p style="color: gray;">Conteúdo indisponível ou erro no carregamento. <br> <small>${path}</small></p></div>`;
-            container.appendChild(errorDiv);
-            if (tocContainer) {
-              var errLink = document.createElement('a');
-              errLink.href = '#' + sectionId;
-              errLink.textContent = (currentIndex+1) + '. ' + title + ' (indisponível)';
-              tocContainer.appendChild(errLink);
-            }
+            currentIndex++;
+            loadNext();
+          }
+        };
+        xhr.onerror = function () {
+          console.error('Network error loading:', path);
+          var errorDiv = document.createElement('div');
+          errorDiv.id = sectionId;
+          errorDiv.className = 'song-card';
+          errorDiv.innerHTML = `<div><h3>❌ ${title}</h3><p>Erro de rede ou CORS — não foi possível carregar a cifra.</p></div>`;
+          container.appendChild(errorDiv);
+          if (tocContainer) {
+            var failLink = document.createElement('a');
+            failLink.href = '#' + sectionId;
+            failLink.textContent = (currentIndex + 1) + '. ' + title + ' (erro)';
+            tocContainer.appendChild(failLink);
           }
           currentIndex++;
           loadNext();
-        }
-      };
-      xhr.onerror = function() {
-        console.error('Network error loading:', path);
-        var errorDiv = document.createElement('div');
-        errorDiv.id = sectionId;
-        errorDiv.className = 'song-card';
-        errorDiv.innerHTML = `<div><h3>❌ ${title}</h3><p>Erro de rede ou CORS — não foi possível carregar a cifra.</p></div>`;
-        container.appendChild(errorDiv);
-        if (tocContainer) {
-          var failLink = document.createElement('a');
-          failLink.href = '#' + sectionId;
-          failLink.textContent = (currentIndex+1) + '. ' + title + ' (erro)';
-          tocContainer.appendChild(failLink);
-        }
-        currentIndex++;
-        loadNext();
-      };
-      xhr.send();
+        };
+        xhr.send();
+      }
+      loadNext();
     }
-    loadNext();
-  }
 
     // ---------- AUTO SCROLL LOGIC ----------
     var scrollInterval = null;
@@ -474,28 +483,62 @@ brincadeira-da-tomada`;
       if (autoScrollBtn) autoScrollBtn.textContent = '▶ Auto scroll';
     }
 
-    function startAutoScroll() {
-      if (scrollInterval) stopAutoScroll();
-      var velocityVal = parseInt(velocitySlider.value, 10);
-      var paceMs = Math.max(10, 1000 / velocityVal);  // velocity: higher = faster (pixels per frame? we use incremental step)
-      // Smooth continuous scroll: scrollBy small steps each interval
-      scrollInterval = setInterval(() => {
-        var scrollAmount = 1;   // 1px per interval gives fluid control
-        // if velocity > 60, increase step for more speed
-        var step = Math.min(20, Math.floor(velocityVal / 10) + 1);
-        window.scrollBy(0, step);
-        // optional: if reached bottom, stop? keep gentle stop at bottom condition
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
-          // near bottom -> stop auto-scroll to avoid infinite
-          if (scrollInterval) {
-            stopAutoScroll();
-            if (autoScrollBtn) autoScrollBtn.textContent = '▶ Auto scroll';
-          }
-        }
-      }, paceMs);
-      if (autoScrollBtn) autoScrollBtn.textContent = '⏸ Stop scroll';
-    }
+  // ============================================
+  // CONFIGURAÇÕES DO AUTO SCROLL
+  var AUTO_SCROLL_CONFIG = {
+    intervaloBase: 10000,       // ← AUMENTE (6000 → 10000) para tudo ficar mais lento
+    intervaloMinimoMs: 20,      // mantém (máximo rápido)
+    passoMaximoPixels: 15,      // mantém
+    divisorVelocidade: 8,       // mantém
+    passoMinimoPixels: 1,
+  };
+  // ============================================
 
+   // ============================================
+  // FUNÇÃO DE AUTO SCROLL - MAPEAMENTO PARA DEIXAR TUDO MAIS LENTO
+  // ============================================
+  function startAutoScroll() {
+    if (scrollInterval) stopAutoScroll();
+    
+    var rawValue = parseInt(velocitySlider.value, 10);
+    
+    // ============================================
+    // MAPEAMENTO: curva exponencial para deixar TUDO mais lento
+    // Expoente 2.5 = valores baixos ficam MUITO baixos, valores altos ficam mais baixos
+    // ============================================
+    var t = Math.pow(rawValue / 100, 2.5);  // expoente maior = tudo mais lento
+    var mappedValue = t * 100;
+    
+    var safeVelocity = Math.max(1, mappedValue);
+    
+    var paceMs = Math.max(
+      AUTO_SCROLL_CONFIG.intervaloMinimoMs,
+      AUTO_SCROLL_CONFIG.intervaloBase / safeVelocity
+    );
+    
+    var step = Math.min(
+      AUTO_SCROLL_CONFIG.passoMaximoPixels,
+      Math.floor(safeVelocity / AUTO_SCROLL_CONFIG.divisorVelocidade) + AUTO_SCROLL_CONFIG.passoMinimoPixels
+    );
+    
+    console.log(`Slider: ${rawValue}% → Velocidade real: ${mappedValue.toFixed(1)}% | Pace: ${paceMs}ms | Step: ${step}px`);
+    
+    scrollInterval = setInterval(() => {
+      window.scrollBy(0, step);
+      
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+        if (scrollInterval) {
+          stopAutoScroll();
+          if(autoScrollBtn) autoScrollBtn.textContent = '▶ Auto scroll';
+        }
+      }
+    }, paceMs);
+    
+    if (autoScrollBtn) autoScrollBtn.textContent = '⏸ Stop scroll';
+  }
+
+
+  // ============================================
     function toggleAutoScroll() {
       if (scrollInterval) {
         stopAutoScroll();
@@ -572,6 +615,14 @@ brincadeira-da-tomada`;
     // but keep as is: the final renderSetlistHeader call will fire after all files loaded.
     // however the badge count update happens at start.
     // Also add a resize listener for nothing. all good.
+
+      // Mostrar percentual da velocidade
+  var velPercent = document.getElementById('velPercent');
+  if (velocitySlider && velPercent) {
+    velocitySlider.addEventListener('input', function() {
+      velPercent.textContent = velocitySlider.value + '%';
+    });
+  }
   </script>
 </body>
 
