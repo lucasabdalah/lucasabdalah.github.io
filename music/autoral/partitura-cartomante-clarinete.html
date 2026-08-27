@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cartomante - Partitura para Bb</title>
+  <script src="https://cdn.jsdelivr.net/npm/abcjs@6.2.2/dist/abcjs-basic-min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/abcjs@6.2.2/abcjs-audio.css">
+</head>
+<body>
+
+  <h2>Cartomante - Partitura para Bb</h2>
+  
+  <div id="audio"></div>
+  <br>
+  <div id="paper"></div>
+
+  <script>
+    var abcNotation = `
+X: 1
+T: Carimbó
+M: 2/4
+L: 1/8
+Q: 1/4=105
+K: G#m
+%%MIDI program 65
+%%MIDI transpose -2
+"Intro" .c .d .e |  .^A .B .c | .e .d .c .B .^A G# |
+"Parte 1" z2 G#2 z d2 c2 | z2 ^A2 z e2 d2 | z2 G#2 z d2 c2 |
+"Parte 2" .c .d .e | .^A .B .c | .e .d .c .B .^A G# |]
+    `;
+
+    var visualObj = ABCJS.renderAbc("paper", abcNotation)[0];
+
+    if (ABCJS.synth.supportsAudio()) {
+      var synthControl = new ABCJS.synth.SynthController();
+      synthControl.load("#audio", null, {
+        displayRestart: true,
+        displayPlay: true,
+        displayProgress: true,
+        displayWarp: true
+      });
+
+      var createSynth = new ABCJS.synth.CreateSynth();
+      createSynth.init({ visualObj: visualObj }).then(function () {
+        synthControl.setTune(visualObj, false);
+      });
+    }
+  </script>
+
+</body>
+</html>
