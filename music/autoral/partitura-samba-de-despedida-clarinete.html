@@ -1,43 +1,110 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Partitura - Clarinete</title>
+  <title>Samba de Despedida - Lucas Abdalah</title>
   <script src="https://cdn.jsdelivr.net/npm/abcjs@6.2.2/dist/abcjs-basic-min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/abcjs@6.2.2/abcjs-audio.css">
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-      background-color: #f9f9f9;
+      background: #f4f4f4;
     }
-    #papel {
-      max-width: 800px;
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+    #audio, #paper {
+      max-width: 900px;
       margin: 0 auto;
       background: #fff;
       padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    #audio {
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-
-  <div id="papel"></div>
-
+  <h1>Samba de Despedida</h1>
+  <h2>Lucas Abdalah</h2>
+  <div id="audio"></div>
+  <div id="paper"></div>
   <script>
-    const partitura = `
-X:1
-T:Samba de Despedida - Partitura para Bb
-M:4/4
-L:1/4
-K:E
-"^[Intro]" |
-"^[Verso I]" |
-"^[Verso II]" |
-"^[Refrão]" |
-"^[Fim - Intro que termina em Em]" |
-    `;
+    var abcNotation = `X: 1
+T: Samba de Despedida
+C: Lucas Abdalah
+M: 4/4
+L: 1/8
+Q: 1/4=75
+K: D
+%%MIDI chordvol 0
+%%MIDI bassvol 0
+%%score 1
+V: 1 name="Clarinete" clef=treble
+%%MIDI program 71
+V: 2 name="Piano" clef=treble
+%%MIDI program 0
+"^Intro"
+[V:1] "Bb7M/E" a8 | "Bb7M/E" a2 "Em7(b5)" g2 "C#7M/G" =c'2 "Gm7(b5)" _b2 | "D7M" a8 | "D7M" (_d/2 =d/2 _d7) |
+[V:2] [E_Bda]7 z | [E_Bda]2 [E_Bdg]2 [G^c=f=c']2 [G_d=f_b]2 | [D^FA^c]8 | [D^FA^c]8 |
+"^Verso 1"
+[V:1] "D7M" z8 | "Gm6" z8 | "D" z4 (_a/2 z/2 =a/2) "D5+" =_b2 z4 | "Am7" z4 "D7(9)" z4 |
+[V:2] [D^FA^c]8 | [G_Bde]8 | [D^FAd]4 [D^F^Ad]4 | [A,=CEG]4 [=CD^Fe]4 |
+[V:1] "Am7" z4 "D7(9)" z4 | "G#m7(b5)" z4 "Gm6" | z4 "F#m7" z4 "F#7(13-)"|
+[V:2] [A,=CEG]4 [=CD^Fe]4 | [^GBd^f]4 | [G_Bde]4 | [^FA^ce]4 [^F^Ade]4|
+[V:1] "Bm7/9" z8 | "G/A" z4 "G9/A" z4 ||
+[V:2] [Bdf^c]8 | [Agbd]4 [Ag_b_d]4 ||
+"^Verso 2"
+[V:1] "D7M" z8 | "Gm6" z8 | "D" z4 "D5+" z4 | "Am7" z4 "D7(9)" z4 |
+[V:2] [D^FA^c]8 | [G_Bde]8 | [D^FAd]4 [D^F^Ad]4 | [A,=CEG]4 [=CD^Fe]4 |
+[V:1] "Am7" z4 "D7(9)" z4 | "G#m7(b5)" z4 "Gm6" | z4 "F#m7" z4 "F#7(13-)"|
+[V:2] [A,=CEG]4 [=CD^Fe]4 | [^GBd^f]4 | [G_Bde]4 | [^FA^ce]4 [^F^Ade]4|
+[V:1] "Bm7/9" z8 | "Bm7" z2 "Bbm7" z2 | "Am7" z4 "D7(9)" z4||
+[V:2] [Bdf^c]8 | [Bdfa]2 [_B_d=f_a]2 | [A=ceg]4 [=cd^fe]4 ||
+"^Refrão - Parte 1"
+[V:1] "G#m7(b5)" z8 | "Gm6" z8 | "F#m7" z8 | "Fº" z8 | "Em9" z8 |
+[V:2] [^GBd^f]8 | [G_Bde]8 | [^FA^ce]8 | [F_ABd]8 | [EGB^f]8 |
+[V:1] | "G/A" z4 "G9/A" z4 ||
+[V:2] [Agbd]4 [Ag_b_d]4 ||
+"^Refrão - Parte 2"
+[V:1] "G#m7(b5)" z8 | "Gm6" z8 | "F#m7" z8 | "Fº" z8 |
+[V:2] [^GBd^f]8 | [G_Bde]8 | [^FA^ce]8 | [F_ABd]8 |
+[V:1] "Em9" z4 "F#m7" z4 | "G6/9" z4 "G7(4)(9)" z2 "G9/A" z2 | z5||
+[V:2] [EGB^f]4 [^FA^ce]4 | [GBde]4 [Gcdf]2 [Aceg]2 || []5| 
+"^Final"
+[V:1] "Bb7M/E" z3 a6 z3 | "Bb7M/E" a2 "Em7(b5)" g2 "C#7M/G" =c'2 "Gm7(b5)" _b2 | "Dm" a8 | "Dm" a8 |
+[V:2] [E_Bda]8 z | [E_Bda]2 [E_Bdg]2 [G^c=f=c']2 [G_d=f_b]2 | [D=FAd]8 | [D=FAd]8 |
+[V:1] "Bb7M/E" a6 z3 | "Bb7M/E" a2 "Em7(b5)" g2 "C#7M/G" =c'2 "Gm7(b5)" _b2 | "Dm" a8 | "Dm" a8 |
+[V:2] [E_Bda]8 z | [E_Bda]2 [E_Bdg]2 [G^c=f=c']2 [G_d=f_b]2 | [D=FAd]8 | [D=FAd]8 |
+[V:1] "Bb7M/E" a6 z3 | "Bb7M/E" a2 "Em7(b5)" g2 "C#7M/G" =c'2 "Gm7(b5)" _b2 | "Dm" a8 | "Dm" a8 |
+[V:2] [E_Bda]8 z | [E_Bda]2 [E_Bdg]2 [G^c=f=c']2 [G_d=f_b]2 | [D=FAd]8 | [D=FAd]8 |
+[V:1] "Bb7M/E" a6 z3 | "Bb7M/E" a2 "Em7(b5)" g2 "C#7M/G" =c'2 "Gm7(b5)" _b2 | [V:1] "D6(9)" (_a/2 =a/2 _a7) |]
+[V:2] [E_Bda]8 z | [E_Bda]2 [E_Bdg]2 [G^c=f=c']2 [G_d=f_b]2 | [D^FB^G]8 |]
+`;
 
-    ABCJS.renderAbc("papel", partitura, { responsive: "resize" });
+    var visualObj = ABCJS.renderAbc("paper", abcNotation, { responsive: "resize" })[0];
+
+    if (ABCJS.synth.supportsAudio()) {
+      var synthControl = new ABCJS.synth.SynthController();
+      synthControl.load("#audio", null, {
+        displayRestart: true,
+        displayPlay: true,
+        displayProgress: true,
+        displayWarp: true
+      });
+
+      var createSynth = new ABCJS.synth.CreateSynth();
+      createSynth.init({
+        visualObj: visualObj,
+        options: { chordsOff: true }
+      }).then(function () {
+        synthControl.setTune(visualObj, false);
+      });
+    }
   </script>
 </body>
 </html>
